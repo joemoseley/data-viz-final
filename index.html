@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <meta charset="UTF-8" />
+		<title>Data Visualization Final</title>
+	  <!-- LINK TO STYLESHEET -->
+    <!-- NOTE: You *could* use in-page <style> tags, for your charts
+         but it may be easier to simply add them to the stylesheet
+         provided here. -->
+		<link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <header>
+      <h1>An Analysis of Title 1 Eligible Schools in Chicago</h1>
+      <p>by: Joseph Moseley</p>
+    </header>
+
+    <main> <!-- BEGIN MAIN -->
+
+      <!-- ALL YOUR CONTENT GOES IN <main>! -->
+
+      <!-- Consider placing your charts (and related text) in
+           <section>s as shown below. You may even want to
+           include an id on each section so when you build the
+           charts, you can isolate the section you want the
+           chart to appear in. -->
+
+      <section id="mapHS">
+        <h2>Map of High Schools</h2>
+
+        <p>This map shows title 1 eligible high schools in the city with informational tooltips showing total enrollent, percentage of low income students, and average performance on standardized tests.</p>
+        <div class="tooltip"></div>
+
+        <!-- YOUR CHART! -->
+        <script src="js/d3.min.js"></script>
+        <script src="js/lodash.js"></script>
+        <script src="js/mapHS.js"></script>
+      </section>
+
+      <section id="mapES">
+        <h2>Map of Elementary Schools</h2>
+
+        <p>This map shows title 1 eligible elementary schools in the city with informational tooltips showing total enrollent, percentage of low income students, and average performance on standarized tests.</p>
+        <div class="tooltip"></div>
+
+        <!-- YOUR CHART! -->
+        <script src="js/d3.min.js"></script>
+        <script src="js/lodash.js"></script>
+        <script src="js/mapES.js"></script>
+
+      </section>
+
+      <section id="bar">
+        <h2>Diversity Demographics</h2>
+
+        <p>This bar chart shows the total number of students enrolled in all title 1 eligible schools by ethnicity.</p> <br/><br/><i>note that "Other" includes the following:
+        <ul>
+          <li>Native American: 1,042</li>
+          <li>Asian Pacific Islander: 9</li>
+          <li>Multi: 4,298</li>
+          <li>Hawaiian Pacific Islander: 613</li>
+          <li>Not Avialable: 562</li>
+        </i>
+        </ul>
+
+        <!-- YOUR CHART! -->
+        <script src="js/d3.min.js"></script>
+        <script src="js/lodash.js"></script>
+        <script src="js/bar.js"></script>
+      </section>
+
+      <section id="scatter">
+        <h2>Poverty vs. Performance</h2>
+
+        <p>This scatter plot compares the percentage of low income students in a school to thier average performance percentile on standardized tests.</p>
+
+        <!-- YOUR CHART! -->
+        <button class="buttonES">Elementary Schools</button>
+        <button class="buttonHS">High Schools</button>
+        <script src="js/d3.min.js"></script>
+        <script src="js/lodash.js"></script>
+        <script src="js/scatter.js"></script>
+      </section>
+
+    </main> <!-- END MAIN -->
+
+    <!-- SCRIPTS! -->
+  </body>
+</html>

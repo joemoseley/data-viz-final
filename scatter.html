@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercise Portfolio</title>
+    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <!-- ADD YOUR NAME -->
+      <h1>YOUR NAME: Exercise Portfolio</h1>
+    </header>
+
+    <div id="content">
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Return to Main Page</a></li>
+        </ul>
+      </nav>
+
+      <main>
+        <button class="buttonES">View Elementary Schools</button>
+        <button class="buttonHS">View High Schools</button>
+
+        <h2>Title</h2>
+
+        <p><!-- INFORMATION ABOUT YOUR VISUALIZATION: What is this about? --></p>
+
+        <!-- ADD YOUR VISUALIZATION HERE -->
+
+      </main>
+    </div>
+
+    <script src="js/d3.min.js"></script>
+    <script src="js/lodash.js"></script>
+    <script>
+
+      var margin = {
+        top: 100,
+        right: 100,
+        bottom: 100,
+        left: 100,
+      };
+      var w = 1000;
+          h = 750;
+
+      d3.csv("data/Data-Master.csv").then(function(master) {
+
+        //console.log(progress);
+        //console.log(profile);
+
+      var titleone = _.filter(master, function(d) {
+        if (d.Title_1_Eligible == "TRUE" && d.Average_Performance != "#DIV/0!") {
+          return d;
+        }
+      });
+      var titleoneES = _.filter(titleone, function(d) {
+        if (d.Primary_Category == "ES") {
+          return d;
+        }
+      });
+      var titleoneHS = _.filter(titleone, function(d) {
+        if (d.Primary_Category == "HS") {
+          return d;
+        }
+      });
+      console.log(titleone);
+      console.log(titleoneES);
+      console.log(titleoneHS);
+
+      var svg = d3.select("main").append("svg");
+      svg.attr("width", w)
+         .attr("height", h);
+
+      var xScale = d3.scaleLinear()
+                     .domain([0,100])
+                     .range([margin.right, w - margin.left]);
+      var yScale = d3.scaleLinear()
+                     .domain([40,100])
+                     .range([h - margin.top - margin.bottom, 0]);
+
+      var xAxis = d3.axisBottom()
+                    .scale(xScale);
+      var yAxis = d3.axisLeft()
+                    .scale(yScale);
+      svg.append("g")
+         .attr("class", "x-axis")
+         .attr("transform", "translate(0," + (h - margin.bottom) + ")")
+         .call(xAxis);
+      svg.append("g")
+         .attr("class", "y-axis")
+         .attr("transform", "translate(100 ,"+margin.top+")")
+         .call(yAxis);
+
+      var pointsES = svg.selectAll("circle")
+         .data(titleoneES)
+         .enter()
+         .append("circle")
+         .attr("class", "pointsES")
+         .attr("cx", function(d) { return xScale(+d.Average_Performance); })
+         .attr("cy", function(d) { return yScale(+d.Percent_Low_Income) + margin.top; })
+         .attr("r", "3")
+         .attr("fill", "black");
+
+      d3.select(".buttonES")
+        .on("click", function() {
+          console.log("Button Clicked");
+          d3.selectAll(".pointsHS").remove();
+          svg.selectAll(".schoolType")
+             .text("Elementary Schools");
+          svg.selectAll("circle")
+             .data(titleoneES)
+             .enter()
+             .append("circle")
+             // .transition()
+             // .duration(1500)
+             .attr("class", "pointsES")
+             .attr("cx", function(d) { return xScale(+d.Average_Performance); })
+             .attr("cy", function(d) { return yScale(+d.Percent_Low_Income) + margin.top; })
+             .attr("r", 3);
+             // d3.selectAll(".pointsES").remove();
+        })
+
+      d3.select(".buttonHS")
+        .on("click", function() {
+          console.log("Button Clicked");
+ d3.selectAll(".pointsES").remove();
+          svg.selectAll(".schoolType")
+             .text("High Schools");
+          svg.selectAll("circle")
+             .data(titleoneHS)
+             .enter()
+             .append("circle")
+             // .transition()
+             // .duration(1500)
+             .attr("class", "pointsHS")
+             .attr("cx", function(d) { return xScale(+d.Average_Performance); })
+             .attr("cy", function(d) { return yScale(+d.Percent_Low_Income) + margin.top; })
+             .attr("r", 3);
+             // d3.selectAll(".pointsES").remove();
+        })
+
+        svg.append("text")
+           .attr("text-anchor", "middle")
+           .attr("transform", "translate(500,725)")
+           .text("Average Performance Percentile");
+        svg.append("text")
+           .attr("transform", "translate(25,500)rotate(-90)")
+           .text("% Low Income Students");
+        svg.append("text")
+           .attr("class", "schoolType")
+           .attr("x", w/2)
+           .attr("y", margin.top/2)
+           .attr("text-anchor", "middle")
+           .text("Elementary Schools");
+
+
+
+
+
+     })
+
+    </script>
+  </body>
+</html>
