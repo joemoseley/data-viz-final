@@ -11,10 +11,12 @@ main {
 	margin: 0 auto;
 }
 
-p, h1, h2 {
+h1, h2, h3 {
   text-align: center;
 }
-
+p {
+  text-align: justify;
+}
 .tooltip {
   position: absolute;
   top: 0;
@@ -26,7 +28,4 @@ p, h1, h2 {
 }
 .tooltip.hidden {
   display: none;
-}
-.justify {
-  text-align: justify;
 }
