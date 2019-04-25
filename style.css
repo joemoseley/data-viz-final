@@ -27,3 +27,6 @@ p, h1, h2 {
 .tooltip.hidden {
   display: none;
 }
+.justify {
+  text-align: justify;
+}

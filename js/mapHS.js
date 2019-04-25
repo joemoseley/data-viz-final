@@ -4,7 +4,7 @@ var margin = {
   left: 50,
   right: 50
 };
-var hH = innerHeight-margin.top-margin.bottom;
+var hH = 700-margin.top-margin.bottom;
 var wH = innerWidth - margin.left-margin.right;
 
 var svgH = d3.select("#mapHS")

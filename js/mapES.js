@@ -4,7 +4,7 @@ var margin = {
   left: 50,
   right: 50
 };
-var hE = innerHeight-margin.top-margin.bottom;
+var hE = 700-margin.top-margin.bottom;
 var wE = innerWidth - margin.left-margin.right;
 
 var svgE = d3.select("#mapES")
